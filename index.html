@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080b12">
+  <meta name="description" content="Moja stránka — moderné digitálne riešenia, weby a kreatívne služby pre firmy.">
+  <title>Moja stránka | Digitálne riešenia</title>
+  <style>
+    :root {
+      --bg: #080b12;
+      --surface: #111725;
+      --surface-2: #171f30;
+      --text: #f4f7fb;
+      --muted: #a8b2c5;
+      --accent: #7c5cff;
+      --accent-2: #23d5ab;
+      --border: rgba(255,255,255,.1);
+      --radius: 22px;
+      --max: 1160px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+    body {
+      margin: 0; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(ellipse at 85% 0%, rgba(124,92,255,.15), transparent 38%), var(--bg);
+      color: var(--text); line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    button, input, textarea { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    .container { width: min(var(--max), calc(100% - 40px)); margin-inline: auto; }
+    .nav-wrap { position: sticky; top: 0; z-index: 50; background: rgba(8,11,18,.82); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+    nav { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: inline-flex; align-items: center; gap: 11px; font-weight: 800; letter-spacing: -.04em; font-size: 1.15rem; }
+    .brand-mark { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 12px; background: linear-gradient(135deg,var(--accent),#a18bff); box-shadow: 0 8px 28px rgba(124,92,255,.35); }
+    .brand-mark svg { width: 22px; }
+    .nav-links { display: flex; align-items: center; gap: 28px; color: var(--muted); font-size: .94rem; }
+    .nav-links a:hover { color: var(--text); }
+    .menu-toggle { display: none; border: 1px solid var(--border); background: var(--surface); color: var(--text); border-radius: 12px; padding: 9px 12px; cursor: pointer; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 9px; padding: 13px 19px; border: 1px solid transparent; border-radius: 13px; font-weight: 750; cursor: pointer; transition: transform .2s, box-shadow .2s, background .2s; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: linear-gradient(135deg,var(--accent),#6843f3); color: white; box-shadow: 0 10px 28px rgba(124,92,255,.24); }
+    .btn-primary:hover { box-shadow: 0 14px 34px rgba(124,92,255,.38); }
+    .btn-ghost { border-color: var(--border); background: rgba(255,255,255,.03); color: var(--text); }
+    .hero { padding: 100px 0 84px; position: relative; overflow: hidden; }
+    .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 60px; align-items: center; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 9px; color: #c3b8ff; background: rgba(124,92,255,.12); border: 1px solid rgba(124,92,255,.25); border-radius: 999px; padding: 7px 12px; font-size: .83rem; font-weight: 700; }
+    .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent-2); box-shadow: 0 0 12px var(--accent-2); }
+    h1 { font-size: clamp(2.8rem, 5.8vw, 5.25rem); line-height: 1.02; letter-spacing: -.065em; margin: 22px 0; max-width: 720px; }
+    .gradient-text { background: linear-gradient(100deg,#b8a9ff 0%,#7c5cff 42%,#48e0c0 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .hero-copy { color: var(--muted); font-size: 1.13rem; max-width: 570px; margin-bottom: 29px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .trust-row { display: flex; align-items: center; gap: 13px; margin-top: 32px; color: var(--muted); font-size: .9rem; }
+    .avatar-stack { display: flex; padding-left: 4px; }
+    .avatar { width: 30px; height: 30px; display: grid; place-items: center; margin-left: -4px; border-radius: 50%; border: 2px solid var(--bg); background: linear-gradient(135deg,#5140a8,#23bfa4); color: white; font-size: .65rem; font-weight: 800; }
+    .visual { min-height: 420px; display: grid; place-items: center; position: relative; }
+    .orb { position: absolute; width: 330px; height: 330px; border-radius: 50%; background: radial-gradient(circle at 35% 25%,rgba(177,157,255,.9),rgba(124,92,255,.55) 35%,rgba(35,213,171,.14) 65%,transparent 72%); filter: blur(1px); animation: float 7s ease-in-out infinite; }
+    .dashboard { position: relative; width: min(100%, 440px); border: 1px solid rgba(255,255,255,.15); border-radius: 24px; padding: 22px; background: linear-gradient(145deg,rgba(25,33,52,.92),rgba(12,17,28,.9)); box-shadow: 0 28px 90px rgba(0,0,0,.45); transform: rotate(2deg); animation: bob 6s ease-in-out infinite; }
+    .dash-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+    .dash-dots { display: flex; gap: 6px; }
+    .dash-dots i { width: 7px; height: 7px; background: #6e7890; border-radius: 50%; }
+    .dash-label { color: var(--muted); font-size: .8rem; }
+    .metric { font-size: 2.2rem; letter-spacing: -.05em; font-weight: 800; margin: 3px 0; }
+    .positive { color: var(--accent-2); font-size: .8rem; font-weight: 700; }
+    .chart { display: flex; align-items: end; gap: 10px; height: 120px; margin: 20px 0 24px; padding: 0 3px; }
+    .bar { flex: 1; min-width: 0; border-radius: 7px 7px 3px 3px; background: linear-gradient(180deg,#9d8aff,rgba(124,92,255,.22)); transform-origin: bottom; animation: grow 1.2s ease-out both; }
+    .bar:nth-child(1){height:35%;animation-delay:.05s}.bar:nth-child(2){height:49%;animation-delay:.12s}.bar:nth-child(3){height:42%;animation-delay:.19s}.bar:nth-child(4){height:66%;animation-delay:.26s}.bar:nth-child(5){height:56%;animation-delay:.33s}.bar:nth-child(6){height:82%;animation-delay:.4s}.bar:nth-child(7){height:72%;animation-delay:.47s}.bar:nth-child(8){height:100%;animation-delay:.54s}
+    .dash-bottom { display: flex; gap: 12px; }
+    .mini-card { flex: 1; background: rgba(255,255,255,.045); border: 1px solid var(--border); border-radius: 13px; padding: 12px; }
+    .mini-card strong { display: block; font-size: 1.15rem; }
+    .mini-card span { color: var(--muted); font-size: .75rem; }
+    .float-tag { position: absolute; z-index: 2; background: #151d2b; border: 1px solid var(--border); border-radius: 15px; padding: 13px 16px; box-shadow: 0 16px 40px rgba(0,0,0,.3); animation: float 5s ease-in-out infinite; }
+    .float-tag strong { display: block; font-size: .95rem; }
+    .float-tag span { color: var(--muted); font-size: .77rem; }
+    .tag-one { top: 50px; right: -2px; }.tag-two { bottom: 40px; left: -10px; animation-delay: -2s; }
+    section { padding: 84px 0; }
+    .section-head { max-width: 690px; margin: 0 auto 44px; text-align: center; }
+    .kicker { color: var(--accent-2); text-transform: uppercase; letter-spacing: .14em; font-size: .76rem; font-weight: 800; }
+    h2 { font-size: clamp(2rem,4vw,3.25rem); line-height: 1.1; letter-spacing: -.05em; margin: 12px 0 15px; }
+    .section-head p, .muted { color: var(--muted); }
+    .services { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
+    .service-card { padding: 26px; border: 1px solid var(--border); border-radius: var(--radius); background: linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.015)); transition: transform .25s,border-color .25s,background .25s; }
+    .service-card:hover { transform: translateY(-7px); border-color: rgba(124,92,255,.55); background: linear-gradient(145deg,rgba(124,92,255,.1),rgba(255,255,255,.02)); }
+    .service-icon { width: 50px; height: 50px; display: grid; place-items: center; background: rgba(124,92,255,.15); border: 1px solid rgba(124,92,255,.25); border-radius: 15px; color: #c3b8ff; margin-bottom: 20px; }
+    .service-icon svg { width: 24px; height: 24px; }
+    h3 { margin: 0 0 9px; font-size: 1.2rem; letter-spacing: -.025em; }
+    .service-card p { margin: 0; color: var(--muted); font-size: .94rem; }
+    .about { display: grid; grid-template-columns: .9fr 1.1fr; gap: 70px; align-items: center; }
+    .about-panel { border-radius: 28px; padding: 32px; min-height: 310px; background: radial-gradient(circle at 20% 10%,rgba(124,92,255,.3),transparent 45%), var(--surface); border: 1px solid var(--border); display: flex; flex-direction: column; justify-content: space-between; }
+    .quote-mark { font-size: 5rem; color: var(--accent); line-height: .8; font-weight: 900; }
+    .about-panel blockquote { margin: 20px 0; font-size: 1.35rem; line-height: 1.4; font-weight: 650; letter-spacing: -.025em; }
+    .about-copy p { color: var(--muted); }
+    .stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 27px; }
+    .stat { padding: 17px; border-radius: 15px; background: rgba(255,255,255,.035); border: 1px solid var(--border); }
+    .stat strong { display: block; font-size: 1.7rem; letter-spacing: -.05em; }.stat span { font-size: .78rem; color: var(--muted); }
+    .cta-band { border: 1px solid rgba(124,92,255,.3); border-radius: 28px; padding: 44px; background: radial-gradient(ellipse at 90% 10%,rgba(35,213,171,.13),transparent 38%), linear-gradient(120deg,rgba(124,92,255,.17),rgba(255,255,255,.025)); display: flex; align-items: center; justify-content: space-between; gap: 30px; }
+    .cta-band h2 { max-width: 640px; margin-top: 0; }
+    .contact-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 45px; align-items: start; }
+    .contact-info p { color: var(--muted); }
+    .contact-item { display: flex; gap: 13px; align-items: center; margin: 20px 0; }
+    .contact-item .service-icon { flex-shrink: 0; margin: 0; width: 44px; height: 44px; }
+    .contact-item small { display: block; color: var(--muted); }
+    form { padding: 27px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    label { display: block; font-size: .87rem; font-weight: 700; margin-bottom: 7px; }
+    .field { margin-bottom: 16px; }
+    input, textarea { width: 100%; padding: 13px 14px; border-radius: 12px; border: 1px solid var(--border); background: #0b101a; color: var(--text); outline: none; transition: border-color .2s,box-shadow .2s; }
+    input:focus, textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(124,92,255,.13); }
+    textarea { resize: vertical; min-height: 130px; }
+    .form-note { font-size: .78rem; color: var(--muted); margin: 12px 0 0; }
+    .form-status { display: none; margin-top: 14px; padding: 12px 14px; border-radius: 12px; color: #b4ffe9; background: rgba(35,213,171,.1); border: 1px solid rgba(35,213,171,.25); }
+    footer { padding: 28px 0; border-top: 1px solid var(--border); color: var(--muted); font-size: .86rem; }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a:hover { color: var(--text); }
+    /* Bez JavaScriptu zostáva obsah viditeľný. Animácie sa zapnú až po inicializácii JS. */
+    .reveal { opacity: 1; transform: none; transition: opacity .7s ease,transform .7s ease; }
+    .js-ready .reveal:not(.visible) { opacity: 0; transform: translateY(22px); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .back-top { position: fixed; bottom: 22px; right: 22px; z-index: 40; width: 44px; height: 44px; border-radius: 14px; background: var(--accent); color: white; border: 0; box-shadow: 0 8px 24px rgba(124,92,255,.3); cursor: pointer; opacity: 0; pointer-events: none; transform: translateY(8px); transition: .2s; }
+    .back-top.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-13px)} }
+    @keyframes bob { 0%,100%{transform:rotate(2deg) translateY(0)} 50%{transform:rotate(0deg) translateY(-9px)} }
+    @keyframes grow { from{transform:scaleY(.1);opacity:.3} to{transform:scaleY(1);opacity:1} }
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 28px; }.hero { padding-top: 72px; }.visual { min-height: 390px; }
+      .services { grid-template-columns: repeat(2,1fr); }.about { grid-template-columns: 1fr; gap: 30px; }.contact-grid { grid-template-columns: 1fr; gap: 25px; }
+      .cta-band { align-items: flex-start; flex-direction: column; }
+    }
+    @media (max-width: 650px) {
+      .container { width: min(var(--max), calc(100% - 28px)); }
+      .nav-links { display: none; position: absolute; top: 76px; left: 0; right: 0; padding: 18px 22px 22px; background: #0c111b; border-bottom: 1px solid var(--border); flex-direction: column; align-items: stretch; gap: 16px; }
+      .nav-links.open { display: flex; }.nav-links .btn { width: 100%; }.menu-toggle { display: inline-flex; }
+      h1 { font-size: clamp(2.65rem,13vw,4.2rem); }.hero-copy { font-size: 1rem; }.visual { min-height: 330px; }.orb { width: 260px; height: 260px; }
+      .dashboard { padding: 16px; }.tag-one { right: -2px; top: 15px; }.tag-two { left: -3px; bottom: 14px; }.float-tag { padding: 10px 12px; }
+      section { padding: 62px 0; }.services { grid-template-columns: 1fr; }.stats { grid-template-columns: 1fr; }.stat { display: flex; align-items: center; justify-content: space-between; }
+      .cta-band { padding: 27px; }.form-row { grid-template-columns: 1fr; gap: 0; }form { padding: 20px; }.footer-inner { flex-direction: column; align-items: flex-start; }.footer-links { flex-wrap: wrap; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="nav-wrap">
+    <nav class="container" aria-label="Hlavná navigácia">
+      <a class="brand" href="#domov" aria-label="Moja stránka – domov">
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 17 12 4l7 13h-5l-2-4-2 4H5Z" stroke="white" stroke-width="2" stroke-linejoin="round"/></svg></span>
+        <span>Moja stránka<span class="gradient-text">.</span></span>
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Otvoriť navigáciu">☰ Menu</button>
+      <div class="nav-links" id="navLinks">
+        <a href="#sluzby">Služby</a>
+        <a href="#onas">O nás</a>
+        <a href="#kontakt">Kontakt</a>
+        <a class="btn btn-primary" href="#kontakt">Nezáväzný dopyt <span aria-hidden="true">↗</span></a>
+      </div>
+    </nav>
+  </div>
+
+  <main>
+    <section class="hero" id="domov">
+      <div class="container hero-grid">
+        <div class="reveal">
+          <span class="eyebrow"><span class="dot"></span> Nápady, ktoré posúvajú firmy</span>
+          <h1>Váš ďalší krok začína <span class="gradient-text">dobrým nápadom.</span></h1>
+          <p class="hero-copy">Pomáhame značkám rásť v digitálnom svete. Spájame premyslený dizajn, moderné technológie a riešenia, ktoré dávajú zmysel vášmu podnikaniu.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#kontakt">Poďme spolupracovať <span aria-hidden="true">→</span></a>
+            <a class="btn btn-ghost" href="#sluzby">Objaviť služby <span aria-hidden="true">↓</span></a>
+          </div>
+          <div class="trust-row">
+            <div class="avatar-stack" aria-hidden="true"><span class="avatar">MK</span><span class="avatar">AS</span><span class="avatar">JP</span></div>
+            <span>Osobný prístup. Premyslené riešenia.</span>
+          </div>
+        </div>
+        <div class="visual" aria-label="Ilustračná grafika digitálneho prehľadu">
+          <div class="orb"></div>
+          <div class="float-tag tag-one"><strong>✦ Kreatívny prístup</strong><span>Každý detail má význam</span></div>
+          <div class="dashboard">
+            <div class="dash-top"><div><div class="dash-label">Prehľad projektu</div><strong>Výsledky v pohybe</strong></div><div class="dash-dots"><i></i><i></i><i></i></div></div>
+            <div class="dash-label">Celkový rast projektu</div><div class="metric">+38,6 %</div><div class="positive">↗ Pozitívny trend</div>
+            <div class="chart" aria-hidden="true"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span></div>
+            <div class="dash-bottom"><div class="mini-card"><span>Stratégia</span><strong>Jasný plán</strong></div><div class="mini-card"><span>Realizácia</span><strong>Po krokoch</strong></div></div>
+          </div>
+          <div class="float-tag tag-two"><strong>✓ Dôraz na kvalitu</strong><span>Od nápadu po výsledok</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="sluzby">
+      <div class="container">
+        <div class="section-head reveal"><span class="kicker">Čo robíme</span><h2>Všetko dôležité pre váš <span class="gradient-text">digitálny rast.</span></h2><p>Praktické služby, ktoré spolu vytvárajú funkčný a konzistentný zážitok pre vašich zákazníkov.</p></div>
+        <div class="services">
+          <article class="service-card reveal"><div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 4v5"/></svg></div><h3>Webové stránky</h3><p>Moderné, rýchle a responzívne weby, ktoré jasne komunikujú hodnotu vašej značky.</p></article>
+          <article class="service-card reveal"><div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m12 3 2.5 5.5L20 11l-5.5 2.5L12 19l-2.5-5.5L4 11l5.5-2.5L12 3Z"/><path d="m19 16 1.2 2.3L22.5 19.5l-2.3 1.2L19 23l-1.2-2.3-2.3-1.2 2.3-1.2L19 16Z"/></svg></div><h3>Vizuálna identita</h3><p>Pomôžeme vašej značke nájsť vlastný štýl a pôsobiť profesionálne na každom mieste.</p></article>
+          <article class="service-card reveal"><div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19V5M4 19h17"/><path d="m7 15 4-5 3 2 5-7"/></svg></div><h3>Digitálna stratégia</h3><p>Premeníme ciele na zrozumiteľný plán a pomôžeme vám robiť lepšie rozhodnutia.</p></article>
+          <article class="service-card reveal"><div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="2.5" width="14" height="19" rx="2"/><path d="M9 6h6M10 18h4"/></svg></div><h3>Responzívny dizajn</h3><p>Príjemné používanie na mobile, tablete aj počítači bez kompromisov v kvalite.</p></article>
+          <article class="service-card reveal"><div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1m8.6 8.6 2.1 2.1m0-12.8-2.1 2.1m-8.6 8.6-2.1 2.1"/><circle cx="12" cy="12" r="5"/></svg></div><h3>Automatizácia</h3><p>Jednoduchšie procesy a digitálne nástroje, ktoré šetria čas vášho tímu.</p></article>
+          <article class="service-card reveal"><div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16v12H7l-3 4V4Z"/><path d="M8 8h8M8 12h5"/></svg></div><h3>Konzultácie</h3><p>Prejdeme si vaše potreby a navrhneme ďalší krok, ktorý bude sedieť vášmu podnikaniu.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="onas">
+      <div class="container about">
+        <div class="about-panel reveal"><div class="quote-mark">“</div><blockquote>Dobré riešenie nie je len pekné. Je užitočné, zrozumiteľné a vytvorené pre ľudí.</blockquote><div class="muted">— Filozofia tímu Moja stránka</div></div>
+        <div class="about-copy reveal"><span class="kicker">O našom prístupe</span><h2>Malé detaily. <span class="gradient-text">Veľký rozdiel.</span></h2><p>Veríme, že úspešná spolupráca začína počúvaním. Najprv pochopíme vaše ciele a potom navrhneme riešenie, ktoré ich pomôže naplniť.</p><p>Komunikujeme otvorene, pracujeme systematicky a dbáme na to, aby ste rozumeli každému kroku. Žiadne zbytočné komplikácie — len premyslená práca a jasný smer.</p>
+          <div class="stats"><div class="stat"><strong>01</strong><span>Osobný prístup</span></div><div class="stat"><strong>02</strong><span>Jasný proces</span></div><div class="stat"><strong>03</strong><span>Dôraz na kvalitu</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container"><div class="cta-band reveal"><div><span class="kicker">Máte nápad?</span><h2>Poďme z neho vytvoriť <span class="gradient-text">niečo skvelé.</span></h2><p class="muted">Prvý rozhovor je nezáväzný. Povedzte nám, čo potrebujete.</p></div><a class="btn btn-primary" href="#kontakt">Kontaktujte nás <span aria-hidden="true">↗</span></a></div></div>
+    </section>
+
+    <section id="kontakt">
+      <div class="container">
+        <div class="section-head reveal"><span class="kicker">Spojme sa</span><h2>Začnime sa <span class="gradient-text">rozprávať.</span></h2><p>Napíšte nám niečo o svojom projekte. Ozveme sa vám a spoločne preberieme možnosti.</p></div>
+        <div class="contact-grid">
+          <div class="contact-info reveal"><h3>Radi vás spoznáme</h3><p>Či už máte konkrétnu predstavu, alebo len prvotný nápad, prvý krok môže byť jednoduchý.</p>
+            <div class="contact-item"><div class="service-icon">✉</div><div><strong>E-mail</strong><small>doplňte-váš-email@example.com</small></div></div>
+            <div class="contact-item"><div class="service-icon">⌖</div><div><strong>Pôsobnosť</strong><small>Slovensko a online spolupráca</small></div></div>
+            <p class="form-note">Poznámka: pred zverejnením nahraďte ukážkové kontaktné údaje vlastnými.</p>
+          </div>
+          <form id="contactForm" class="reveal">
+            <div class="form-row"><div class="field"><label for="name">Meno</label><input id="name" name="name" autocomplete="name" placeholder="Vaše meno" required></div><div class="field"><label for="email">E-mail</label><input id="email" name="email" type="email" autocomplete="email" placeholder="vas@email.sk" required></div></div>
+            <div class="field"><label for="subject">Čo potrebujete?</label><input id="subject" name="subject" placeholder="Napr. nový web, konzultácia..." required></div>
+            <div class="field"><label for="message">Správa</label><textarea id="message" name="message" placeholder="Povedzte nám pár slov o vašom projekte..." required></textarea></div>
+            <button class="btn btn-primary" type="submit">Pripraviť e-mail <span aria-hidden="true">→</span></button>
+            <p class="form-note">Formulár otvorí váš e-mailový program s pripravenou správou. Na automatické odosielanie je potrebné pripojiť backend alebo formulárovú službu.</p>
+            <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="container footer-inner"><a class="brand" href="#domov"><span class="brand-mark" aria-hidden="true">M</span><span>Moja stránka<span class="gradient-text">.</span></span></a><span>© <span id="year"></span> Moja stránka. Všetky práva vyhradené.</span><div class="footer-links"><a href="#sluzby">Služby</a><a href="#onas">O nás</a><a href="#kontakt">Kontakt</a></div></div></footer>
+  <button class="back-top" id="backTop" aria-label="Späť na začiatok" title="Späť na začiatok">↑</button>
+
+  <script>
+    // Mobilná navigácia
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    menuToggle.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      menuToggle.setAttribute('aria-expanded', String(isOpen));
+      menuToggle.innerHTML = isOpen ? '✕ Zavrieť' : '☰ Menu';
+    });
+    navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.innerHTML = '☰ Menu';
+    }));
+
+    // Jemné zobrazovanie prvkov pri posúvaní stránky
+    const revealItems = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window) {
+      document.body.classList.add('js-ready');
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      revealItems.forEach(item => observer.observe(item));
+    } else {
+      revealItems.forEach(item => item.classList.add('visible'));
+    }
+
+    // Tlačidlo návratu na začiatok
+    const backTop = document.getElementById('backTop');
+    window.addEventListener('scroll', () => backTop.classList.toggle('show', window.scrollY > 500), { passive: true });
+    backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    // Aktuálny rok v pätičke
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Kontaktný formulár vytvorí e-mail v používateľovom e-mailovom programe.
+    document.getElementById('contactForm').addEventListener('submit', event => {
+      event.preventDefault();
+      const form = event.currentTarget;
+      if (!form.reportValidity()) return;
+      const data = new FormData(form);
+      const recipient = 'doplňte-váš-email@example.com'; // Zmeňte na skutočný e-mail firmy.
+      const subject = encodeURIComponent('Dopyt z webu: ' + data.get('subject'));
+      const body = encodeURIComponent(
+        'Meno: ' + data.get('name') + '\\n' +
+        'E-mail: ' + data.get('email') + '\\n\\n' +
+        'Správa:\\n' + data.get('message')
+      );
+      const status = document.getElementById('formStatus');
+      status.style.display = 'block';
+      status.textContent = 'Otvorí sa váš e-mailový program. Ak sa neotvorí, skontrolujte, či máte nastavenú e-mailovú aplikáciu.';
+      window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
+    });
+  </script>
+</body>
+</html>
